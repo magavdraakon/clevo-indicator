@@ -1,4 +1,8 @@
 /*
+CLI app is based from clevo-indicator from  AqD <iiiaqd@gmail.com>
+
+Modifications made by Margus Ernits
+
  ============================================================================
  Name        : clevo-indicator.c
  Author      : AqD <iiiaqd@gmail.com>
