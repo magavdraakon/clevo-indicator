@@ -22,17 +22,7 @@ Modifications made by Margus Ernits
  Run as effective uid = root, but uid = desktop user (in order to use indicator).
 
  ============================================================================
- Auto fan control algorithm:
-
- The algorithm is to replace the builtin auto fan-control algorithm in Clevo
- laptops which is apparently broken in recent models such as W350SSQ, where the
- fan doesn't get kicked until both of GPU and CPU are really hot (and GPU
- cannot be hot anymore thanks to nVIDIA's Maxwell chips). It's far more
- aggressive than the builtin algorithm in order to keep the temperatures below
- 60°C all the time, for maximized performance with Intel turbo boost enabled.
-
- ============================================================================
- */
+*/
 
 #include <dirent.h>
 #include <errno.h>
@@ -136,18 +126,8 @@ int main(int argc, char* argv[]) {
 Dump/Control fan duty on Clevo laptops. Display indicator by default.\n\
 \n\
 Arguments:\n\
-  [fan-duty-percentage]\t\tTarget fan duty in percentage, from 40 to 100\n\
+  [fan-duty-percentage]\t\tTarget fan duty in percentage, from 30 to 100\n\
   -?\t\t\t\tDisplay this help and exit\n\
-\n\
-Without arguments this program should attempt to display an indicator in\n\
-the Ubuntu tray area for fan information display and control. The indicator\n\
-requires this program to have setuid=root flag but run from the desktop user\n\
-, because a root user is not allowed to display a desktop indicator while a\n\
-non-root user is not allowed to control Clevo EC (Embedded Controller that's\n\
-responsible of the fan). Fix permissions of this executable if it fails to\n\
-run:\n\
-    sudo chown root clevo-indicator\n\
-    sudo chmod u+s  clevo-indicator\n\
 \n\
 Note any fan duty change should take 1-2 seconds to come into effect - you\n\
 can verify by the fan speed displayed on indicator icon and also louder fan\n\
@@ -155,11 +135,6 @@ noise.\n\
 \n\
 In the indicator mode, this program would always attempt to load kernel\n\
 module 'ec_sys', in order to query EC information from\n\
-'/sys/kernel/debug/ec/ec0/io' instead of polling EC ports for readings,\n\
-which may be more risky if interrupted or concurrently operated during the\n\
-process.\n\
-\n\
-DO NOT MANIPULATE OR QUERY EC I/O PORTS WHILE THIS PROGRAM IS RUNNING.\n\
 \n");
             return main_dump_fan();
         } else {
